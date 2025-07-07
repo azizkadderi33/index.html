@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>زخرفلي DZ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: url('https://up6.cc/2025/07/175185286313331.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      padding: 10px;
+    }
+    h1, h2 {
+      text-align: center;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px red;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background: #ff0000;
+      color: white;
+    }
+    .section {
+      background: rgba(0,0,0,0.7);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+    .output div {
+      background: #111;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #333;
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background: #1877f2;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .fb-support {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: #1877f2;
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+    .fb-support a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔥 زخرفلي DZ 🔥</h1>
+
+<!-- قسم الذكاء حسب اللغة -->
+<div class="section">
+  <h2>زخرفة ذكية للكلمات (عربية / فرنسية)</h2>
+  <input type="text" id="word" placeholder="أدخل كلمة">
+  <button onclick="smartDecorate()">زخرف</button>
+  <div id="smartout" class="output"></div>
+</div>
+
+<!-- قسم زخرفة الأرقام -->
+<div class="section">
+  <h2>زخرفة الأرقام بأنماط متنوعة</h2>
+  <input type="text" id="number" placeholder="أدخل أرقام">
+  <button onclick="decorateNumbers()">زخرف</button>
+  <div id="numout" class="output"></div>
+</div>
+
+<!-- قسم زخرفة أسماء الفايسبوك -->
+<div class="section">
+  <h2>زخرفة أسماء فيسبوك (مقبولة)</h2>
+  <input type="text" id="fb" placeholder="أدخل اسمك">
+  <button onclick="decorateFB()">زخرف</button>
+  <div id="fbout" class="output"></div>
+</div>
+
+<div class="fb-support">
+  <a href="https://www.facebook.com/profile.php?id=61578242454476" target="_blank">💬 دعم / استفسار</a>
+</div>
+
+<p style="text-align:center; color:#ccc;">🛠 المطور: عبد العزيز قدوري</p>
+
+<script>
+const arabicStyles = ["كـ", "مـ", "عـ", "ـي", "ٱ", "ڤ", "ڨ", "گ", "پ", "ـہ", "ﮯ", "ـﮧ", "ـﯣ", "ـﯾ", "ـﭑ", "ـﮩ", "ۗۗۗۗۗۗۗۗۗۗ"];
+const frenchStyles = ["𝒶", "𝓑", "𝓒", "𝓓", "𝓔", "𝓕", "𝓖", "𝓗", "𝓘", "𝓙", "𝓚", "𝓛", "𝓜", "𝓝", "𝓞", "𝓟", "𝓠", "𝓡", "𝓢", "𝓣", "𝓤", "𝓥", "𝓦", "𝓧", "𝓨", "𝓩",
+                     "𝐚", "𝐛", "𝐜", "𝐝", "𝐞", "𝐟", "𝐠", "𝐡", "𝐢", "𝐣", "𝐤", "𝐥", "𝐦", "𝐧", "𝐨", "𝐩", "𝐪", "𝐫", "𝐬", "𝐭", "𝐮", "𝐯", "𝐰", "𝐱", "𝐲", "𝐳"];
+const numberStyles = [
+  ["⓿","①","②","③","④","⑤","⑥","⑦","⑧","⑨"],
+  ["➀","➁","➂","➃","➄","➅","➆","➇","➈","➉"],
+  ["𝟘","𝟙","𝟚","𝟛","𝟜","𝟝","𝟞","𝟟","𝟠","𝟡"],
+  ["🄌","🄁","🄂","🄃","🄄","🄅","🄆","🄇","🄈","🄉"],
+  ["⓪","❶","❷","❸","❹","❺","❻","❼","❽","❾"]
+];
+const fbSafe = ["ツ", "々", "•", "×", "°", "☆", "♛", "♚", "☯", "۝", "𓆩", "𓆪", "★", "彡"];
+
+function smartDecorate() {
+  let input = document.getElementById("word").value.trim();
+  let out = document.getElementById("smartout");
+  out.innerHTML = "";
+  if (!input) return;
+  let isArabic = /[؀-ۿ]/.test(input);
+  let result = [];
+  for (let i = 0; i < 2000; i++) {
+    let line = "";
+    for (let ch of input) {
+      if (isArabic) {
+        line += arabicStyles[Math.floor(Math.random()*arabicStyles.length)] + ch;
+      } else if (/[a-zA-Z]/.test(ch)) {
+        line += frenchStyles[Math.floor(Math.random()*frenchStyles.length)];
+      } else {
+        line += ch;
+      }
+    }
+    result.push(line);
+  }
+  result.forEach(t => {
+    let div = document.createElement("div");
+    div.innerHTML = t + `<button class='copy-btn' onclick='copyText(${JSON.stringify(t)})'>📋 نسخ</button>`;
+    out.appendChild(div);
+  });
+}
+
+function decorateNumbers() {
+  let input = document.getElementById("number").value.trim();
+  let out = document.getElementById("numout");
+  out.innerHTML = "";
+  if (!input) return;
+  for (let i = 0; i < 2000; i++) {
+    let style = numberStyles[Math.floor(Math.random()*numberStyles.length)];
+    let converted = "";
+    for (let ch of input) {
+      let n = parseInt(ch);
+      converted += (!isNaN(n) ? style[n] : ch);
+    }
+    let div = document.createElement("div");
+    div.innerHTML = converted + `<button class='copy-btn' onclick='copyText(${JSON.stringify(converted)})'>📋 نسخ</button>`;
+    out.appendChild(div);
+  }
+}
+
+function decorateFB() {
+  let input = document.getElementById("fb").value.trim();
+  let out = document.getElementById("fbout");
+  out.innerHTML = "";
+  if (!input) return;
+  for (let i = 0; i < 70; i++) {
+    let sym = fbSafe[Math.floor(Math.random()*fbSafe.length)];
+    let text = sym + " " + input + " " + sym;
+    let div = document.createElement("div");
+    div.innerHTML = text + `<button class='copy-btn' onclick='copyText(${JSON.stringify(text)})'>📋 نسخ</button>`;
+    out.appendChild(div);
+  }
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert("✅ تم النسخ");
+  });
+}
+</script>
+
+</body>
+</html>
